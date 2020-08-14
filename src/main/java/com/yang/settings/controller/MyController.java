@@ -1,8 +1,10 @@
 package com.yang.settings.controller;
 
+import com.yang.exception.LoginException;
 import com.yang.settings.entity.User;
 import com.yang.settings.service.MyService;
 import com.yang.utils.MD5Util;
+import com.yang.utils.PrintJson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 
 @Controller
 public class MyController {
@@ -23,8 +26,20 @@ public class MyController {
         loginPwd = MD5Util.getMD5(loginPwd);
         //接受浏览器的ip地址
         String ip = request.getRemoteAddr();
-        User user = service.login(loginAct,loginPwd,ip);
-        request.getSession().setAttribute("user",user);
+        try {
+            User user = service.login(loginAct,loginPwd,ip);
+            request.getSession().setAttribute("user",user);
+            PrintJson.printJsonFlag(response,true);
+
+        } catch (LoginException e) {
+            String msg = e.getMessage();
+            HashMap<String,Object> map = new HashMap<>();
+            map.put("msg",msg);
+            map.put("success",false);
+            PrintJson.printJsonObj(response,map);
+        }
+
+
     }
 
 }
