@@ -1,6 +1,4 @@
-package com.yang.entity;
-
-import java.util.Objects;
+package com.yang.settings.entity;
 
 public class Student {
     private Integer id;

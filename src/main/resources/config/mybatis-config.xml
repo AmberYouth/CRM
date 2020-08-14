@@ -8,11 +8,11 @@
     </settings>
     <typeAliases>
         <!--name:实体类所在的包名，可用类名代替类路径 -->
-        <package name="com.yang.entity"/>
+        <package name="com.yang.settings.entity"/>
     </typeAliases>
     <mappers>
         <!--使用package的话要求mapper和接口名相同-->
-<!--        <package name="com.yang.dao"/>-->
-        <mapper resource="com/yang/dao/StudentDao.xml"/>
+<!--        <package name="com.yang.settings.dao"/>-->
+        <mapper resource="com/yang/settings/dao/StudentDao.xml"/>
     </mappers>
 </configuration>

@@ -1,8 +1,8 @@
-package com.yang.service.impl;
+package com.yang.settings.service.impl;
 
-import com.yang.dao.StudentDao;
-import com.yang.entity.Student;
-import com.yang.service.MyService;
+import com.yang.settings.dao.StudentDao;
+import com.yang.settings.entity.Student;
+import com.yang.settings.service.MyService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
