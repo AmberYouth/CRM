@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 
 @Controller
 public class MyController {
     @Resource
     private MyService service;
+
+
     @RequestMapping("/login.do")
     public void doMyServlet(HttpServletRequest request,HttpServletResponse response){
         System.out.println("进入了servlet");
