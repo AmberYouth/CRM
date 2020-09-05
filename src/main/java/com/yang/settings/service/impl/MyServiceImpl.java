@@ -4,21 +4,30 @@ import com.yang.exception.LoginException;
 import com.yang.settings.dao.UserDao;
 import com.yang.settings.entity.User;
 import com.yang.settings.service.MyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Service("service")
 public class MyServiceImpl implements MyService {
     @Resource
     private UserDao userDao;
 
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            isolation = Isolation.DEFAULT,
+            readOnly = false,
+            rollbackFor = {
+                    LoginException.class
+            }
+    )
     @Override
     public User login(String loginAct,String loginPwd,String ip) throws LoginException {
         Map<String,String> map = new HashMap<>();

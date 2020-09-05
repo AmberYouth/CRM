@@ -14,6 +14,11 @@
           <element id="module-output" name="CRM框架" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:jstl-impl:1.2" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp:jsp-api:2.1" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:jstl-api:1.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" />
@@ -28,13 +33,11 @@
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.1.10" />
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:2.0" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.2" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.21" />
-          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.5" />
           <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.12" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.2.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.2.8.RELEASE" />
-          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.2.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.2.5.RELEASE" />
           <element id="library" level="project" name="Maven: javax.annotation:javax.annotation-api:1.2" />
