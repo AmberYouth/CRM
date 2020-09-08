@@ -252,6 +252,7 @@ public class clueServiceImpl implements ClueService {
 //                flag  = false;
 //            }
 //        }
+        System.out.println("");
         for (ClueActivityRelation clueActivityRelation:clueActivityRelationList){
             int count8 = clueActivityRelationDao.delete(clueActivityRelation);
             if (count8!=1){
