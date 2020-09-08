@@ -139,12 +139,40 @@ public class ClueController {
     }
 
     @RequestMapping("workbench/clue/convert.do")
-    public void convert(HttpServletRequest request, HttpServletResponse response){
-        Tran tran = null;
+    public void convert(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Tran t = null;
         String clueId = request.getParameter("clueId");
+        System.out.println(clueId+"1232324343545646464");
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println(request.getParameter("flag"));
         String flag = request.getParameter("flag");
+        String createBy = ((User)request.getSession().getAttribute("user")).getName();
         if ("true".equals(flag)){
-
+            t= new Tran();
+            String money = request.getParameter("money");
+            String name = request.getParameter("name");
+            String expectedDate = request.getParameter("expectedDate");
+            String stage = request.getParameter("stage");
+            String activityId = request.getParameter("activityId");
+            String id = UUIDUtil.getUUID();
+            String createTime = DateTimeUtil.getSysTime();
+            t.setName(name);
+            t.setStage(stage);
+            t.setMoney(money);
+            t.setExpectedDate(expectedDate);
+            t.setActivityId(activityId);
+            t.setId(id);
+            t.setCreateBy(createBy);
+            t.setCreateTime(createTime);
+        }
+         boolean flag1 = clueService.convert(clueId,t,createBy);
+        if (flag1){
+            response.sendRedirect(request.getContextPath()+"/workbench/clue/index.jsp");
         }
     }
 

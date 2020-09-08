@@ -48,6 +48,7 @@ public class MyServiceImpl implements MyService {
         }
         String alwIps = user.getAllowIps();
         if(!alwIps.contains(ip)){
+            System.out.println(alwIps+"22222222222222222222");
             throw new LoginException("ip地址受限");
         }
 

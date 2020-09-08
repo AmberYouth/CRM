@@ -90,8 +90,14 @@
                 where clueId = #{clueId}
                 )
         </select>
-	
-  	
+
+        <select id="getById" resultType="Clue">
+                select * from tbl_clue where id=#{id}
+        </select>
+	    
+  	    <delete id="delete">
+                delete from tbl_clue where id=#{id}
+        </delete>
 </mapper>
 
 

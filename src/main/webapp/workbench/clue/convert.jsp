@@ -81,6 +81,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				//window.location.href = "workbench/clue/convert.do?clueId=${param.id}&money= &expectedDate &name= &stage= &activityId= ";
 				$("#tranForm").submit();
 			}else{
+				<%--alert("${param.id}")--%>
 				window.location.href = "workbench/clue/convert.do?clueId=${param.id}";
 			}
 		})
