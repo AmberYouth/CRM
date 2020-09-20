@@ -245,14 +245,13 @@ public class clueServiceImpl implements ClueService {
                 flag = false;
             }
         }
-        //删除线索的备注
+//        删除线索的备注
 //        for (ClueRemark clueRemark:clueRemarkList){
 //            int count7 = clueRemarkDao.delete(clueRemark);
 //            if (count7!=1){
 //                flag  = false;
 //            }
 //        }
-        System.out.println("");
         for (ClueActivityRelation clueActivityRelation:clueActivityRelationList){
             int count8 = clueActivityRelationDao.delete(clueActivityRelation);
             if (count8!=1){

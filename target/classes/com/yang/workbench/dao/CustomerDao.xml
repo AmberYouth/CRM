@@ -37,7 +37,9 @@
     <select id="getCustomerByName" resultType="Customer">
         select * from tbl_customer where name = #{name}
     </select>
-  	
+  	<select id="getCustomerName" resultType="String">
+            select name from tbl_customer where name like '%' #{name} '%'
+    </select>
 </mapper>
 
 

@@ -15,10 +15,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SysInitListener implements ServletContextListener {
     DicService dicService;
@@ -34,6 +31,17 @@ public class SysInitListener implements ServletContextListener {
             application.setAttribute(key,map.get(key));
         }
         System.out.println("服务器缓存处理数据字典结束");
+        //处理完毕后,处理stage2possibility文件
+        //解析文件
+        Map<String,String> pMap = new HashMap<>();
+        ResourceBundle bundle = ResourceBundle.getBundle("config/Stage2Possibility");
+        Enumeration<String> e = bundle.getKeys();
+        while(e.hasMoreElements()){
+            String key = e.nextElement();
+            String value = bundle.getString(key);
+            pMap.put(key,value);
+        }
+        application.setAttribute("pMap",pMap);
     }
 
     @Override
