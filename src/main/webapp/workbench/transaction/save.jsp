@@ -79,7 +79,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			$("#create-possibility").val(possibility);
 		})
 
-		$("#save").click(function(){
+		$("#saveBtn").click(function(){
 			//发出传统请求
 			$("#tranForm").submit();
 		})
@@ -197,7 +197,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		</div>
 		<hr style="position: relative; top: -40px;">
 	</div>
-	<form action="workbench.transaction/save.do" method="POST" id="tranForm" class="form-horizontal" role="form" style="position: relative; top: -30px;">
+	<form action="workbench/transaction/save.do" method="POST" id="tranForm" class="form-horizontal" role="form" style="position: relative; top: -30px;">
 		<div class="form-group">
 			<label for="create-transactionOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 			<div class="col-sm-10" style="width: 300px;">
@@ -306,7 +306,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<label for="create-contactsName" class="col-sm-2 control-label">联系人名称&nbsp;&nbsp;<a href="javascript:void(0);" data-toggle="modal" data-target="#findContacts"><span class="glyphicon glyphicon-search"></span></a></label>
 			<div class="col-sm-10" style="width: 300px;">
 				<input type="text" class="form-control" id="create-contactsName" value="马云">
-				<input type="hidden" name="contactsId" id="fc00216fd3224bc69d4c100751d9f01f"/>
+				<input type="hidden" name="contactsId" value="fc00216fd3224bc69d4c100751d9f01f"/>
 			</div>
 		</div>
 		

@@ -46,21 +46,23 @@ public class TranController {
         PrintJson.printJsonObj(response,sList);
     }
 
-    @RequestMapping("workbench.transaction/save.do")
-    public void save(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping("/workbench/transaction/save.do")
+    public void save(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("我进入tran的页面啦");
         String id = UUIDUtil.getUUID();
         String owner = request.getParameter("owner");
         String money = request.getParameter("money");
         String name = request.getParameter("name");
         String expectedDate = request.getParameter("expectedDate");
+        String customerName = request.getParameter("customerName");
         String customerId = request.getParameter("customerId");
         String stage = request.getParameter("stage");
         String type = request.getParameter("type");
         String source = request.getParameter("source");
         String activityId = request.getParameter("activityId");
         String contactsId = request.getParameter("contactsId");
-        String createBy = request.getParameter("createBy");
-        String createTime = ((User)request.getSession().getAttribute("user")).getName();
+        String createBy = ((User)request.getSession().getAttribute("user")).getName();
+        String createTime = DateTimeUtil.getSysTime();
         String description = request.getParameter("description");
         String contactSummary = request.getParameter("contactSummary");
         String nextContactTime = request.getParameter("nextContactTime");
@@ -80,7 +82,11 @@ public class TranController {
         t.setDescription(description);
         t.setCustomerId(customerId);
         t.setContactsId(contactsId);
+        System.out.println(contactsId+"我想看看contactsId");
         t.setContactSummary(contactSummary);
-
+        boolean flag = tranService.save(t,customerName);
+        if(flag){
+            response.sendRedirect(request.getContextPath()+"/workbench/transaction/index.jsp");
+        }
     }
 }
