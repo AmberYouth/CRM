@@ -6,4 +6,6 @@ public interface TranDao {
 
 
     int save(Tran t);
+
+    Tran detail(String id);
 }

@@ -44,6 +44,40 @@
 
         )
     </insert>
+
+    <select id="detail" resultType="Tran">
+        select
+        tran.id,
+        user.name owner,
+        tran.money,
+        tran.name,
+        tran.expectedDate,
+        cus.name customerId,
+        tran.stage,
+        tran.type,
+        tran.source,
+        activity.name activityId,
+        contacts.fullname contactsId,
+        tran.createBy,
+        tran.createTime,
+        tran.editBy,
+        tran.editTime,
+        tran.description,
+        tran.contactSummary,
+        tran.nextContactTime
+
+
+         from tbl_tran tran
+         join tbl_user user
+         on tran.owner = user.id
+         join tbl_customer cus
+         on tran.customerId = cus.id
+         left join tbl_activity activity
+         on tran.activityId = activity.id
+         left join tbl_contacts contacts
+         on tran.contactsId = contacts.id
+        where tran.id=#{id}
+    </select>
   	
 </mapper>
 

@@ -12,6 +12,7 @@ import com.yang.workbench.service.TranService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.logging.Handler;
 
 @Service("tranServiceImpl")
@@ -54,6 +55,8 @@ public class TranServiceImpl implements TranService {
         TranHistory tranHistory = new TranHistory();
         tranHistory.setId(UUIDUtil.getUUID());
         tranHistory.setCreateBy(t.getCreateBy());
+        tranHistory.setMoney(t.getMoney());
+        tranHistory.setExpectedDate(t.getExpectedDate());
         tranHistory.setTranId(t.getId());
         tranHistory.setCreateTime(DateTimeUtil.getSysTime());
         tranHistory.setStage(t.getStage());
@@ -63,5 +66,19 @@ public class TranServiceImpl implements TranService {
             flag = false;
         }
         return flag;
+    }
+
+    @Override
+    public Tran detail(String id) {
+        Tran tran = tranDao.detail(id);
+
+        return tran;
+    }
+
+    @Override
+    public List<TranHistory> getHistoryListByTranId(String id) {
+        List<TranHistory> thList = tranHistoryDao.getHistoryListByTranId(id);
+
+        return thList;
     }
 }

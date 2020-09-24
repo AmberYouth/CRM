@@ -7,6 +7,7 @@ import com.yang.utils.DateTimeUtil;
 import com.yang.utils.PrintJson;
 import com.yang.utils.UUIDUtil;
 import com.yang.workbench.entity.Tran;
+import com.yang.workbench.entity.TranHistory;
 import com.yang.workbench.service.CustomerService;
 import com.yang.workbench.service.TranService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
 @Controller
 public class TranController {
     @Autowired
@@ -88,5 +92,28 @@ public class TranController {
         if(flag){
             response.sendRedirect(request.getContextPath()+"/workbench/transaction/index.jsp");
         }
+    }
+
+    @RequestMapping("/workbench/transaction/detail.do")
+    public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("跳转到详细信息页");
+        String id = request.getParameter("id");
+        Tran t = tranService.detail(id);
+
+        String stage = t.getStage();
+        Map<String,String> pMap = (Map<String, String>) request.getSession().getServletContext().getAttribute("pMap");
+        String possibility = pMap.get(stage);
+        t.setPossibility(possibility);
+        request.setAttribute("t",t);
+        System.out.println("我想查一下TRANID"+t.getId());
+        request.getRequestDispatcher("/workbench/transaction/detail.jsp").forward(request,response);
+    }
+
+    @RequestMapping("/workbench/transaction/getHistoryListByTranId.do")
+    public void getHistoryListByTranId(HttpServletRequest request, HttpServletResponse response){
+        System.out.println("根据交易Id取得相应的历史列表");
+        String id = request.getParameter("tranId");
+        List<TranHistory> thList = tranService.getHistoryListByTranId(id);
+        PrintJson.printJsonObj(response,thList);
     }
 }
