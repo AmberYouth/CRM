@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -115,5 +116,39 @@ public class TranController {
         String id = request.getParameter("tranId");
         List<TranHistory> thList = tranService.getHistoryListByTranId(id);
         PrintJson.printJsonObj(response,thList);
+    }
+
+    @RequestMapping("workbench/transaction/changeStage.do")
+    public void changeStage(HttpServletRequest request, HttpServletResponse response){
+        System.out.println("执行变更阶段的作用");
+        String id = request.getParameter("id");
+        String stage = request.getParameter("stage");
+        String money = request.getParameter("money");
+        String expectedDate = request.getParameter("expectedDate");
+        String editTime = DateTimeUtil.getSysTime();
+        String editBy = ((User)request.getSession().getAttribute("user")).getName();
+        Tran t = new Tran();
+        t.setMoney(money);
+        t.setEditBy(editBy);
+        t.setEditTime(editTime);
+        t.setStage(stage);
+        t.setExpectedDate(expectedDate);
+        t.setId(id);
+        boolean flag = tranService.changeStage(t);
+        Map<String,Object> map = new HashMap<>();
+        Map<String,String> pMap = (Map<String, String>) request.getSession().getServletContext().getAttribute("pMap");
+        String possibility = pMap.get(stage);
+        t.setPossibility(possibility);
+        map.put("t",t);
+        map.put("flag",flag);
+        System.out.println(flag);
+        PrintJson.printJsonObj(response,map);
+    }
+
+    @RequestMapping("/workbench/transaction/getCharts.do")
+    private void getCharts(HttpServletRequest request, HttpServletResponse response){
+        System.out.println("取得交易阶段数量统计图标的数据");
+        Map<String,Object> map = tranService.getCharts();
+        PrintJson.printJsonObj(response,map);
     }
 }

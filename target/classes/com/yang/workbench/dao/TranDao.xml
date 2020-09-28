@@ -78,7 +78,22 @@
          on tran.contactsId = contacts.id
         where tran.id=#{id}
     </select>
-  	
+
+    <update id="changeStage">
+        update tbl_tran set stage=#{stage},editBy=#{editBy},editTime=#{editTime}
+        where id = #{id}
+    </update>
+
+    <select id="getTotal" resultType="int">
+        select count(*)
+        from tbl_tran
+    </select>
+
+    <select id="getCharts" resultType="map">
+        select count(*) value,stage name
+        from tbl_tran
+        group by stage
+    </select>
 </mapper>
 
 

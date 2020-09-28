@@ -12,7 +12,9 @@ import com.yang.workbench.service.TranService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Handler;
 
 @Service("tranServiceImpl")
@@ -80,5 +82,37 @@ public class TranServiceImpl implements TranService {
         List<TranHistory> thList = tranHistoryDao.getHistoryListByTranId(id);
 
         return thList;
+    }
+
+    @Override
+    public boolean changeStage(Tran t) {
+        boolean flag = true;
+        int count = tranDao.changeStage(t);
+        if (count!=1){
+            flag = false;
+        }
+        TranHistory tranHistory = new TranHistory();
+        tranHistory.setId(UUIDUtil.getUUID());
+        tranHistory.setCreateBy(t.getEditBy());
+        tranHistory.setCreateTime(DateTimeUtil.getSysTime());
+        tranHistory.setExpectedDate(t.getExpectedDate());
+        tranHistory.setTranId(t.getId());
+        tranHistory.setMoney(t.getMoney());
+        tranHistory.setStage(t.getStage());
+        int count2 = tranHistoryDao.save(tranHistory);
+        if (count2!=1){
+            flag = false;
+        }
+        return flag;
+    }
+
+    @Override
+    public Map<String, Object> getCharts() {
+        int total = tranDao.getTotal();
+        List<Map<String,Object>> dataList = tranDao.getCharts();
+        Map<String,Object> map = new HashMap<>();
+        map.put("total",total);
+        map.put("dataList",dataList);
+        return map;
     }
 }
