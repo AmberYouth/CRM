@@ -80,9 +80,6 @@ public class clueServiceImpl implements ClueService {
         if (count==1){
             flag=true;
         }
-
-
-
         return flag;
     }
     @Transactional(
